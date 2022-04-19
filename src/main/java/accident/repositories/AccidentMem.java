@@ -22,4 +22,22 @@ public class AccidentMem implements Store {
     public Collection<Accident> findAll() {
         return accidents.values();
     }
+
+    @Override
+    public void create(Accident accident) {
+        accident.setId(accidents.size() + 1);
+        accidents.put(accidents.size() + 1, accident);
+        System.out.println(accident.getId());
+    }
+
+    @Override
+    public void update(Accident accident) {
+        System.out.println(accident.getId());
+        accidents.replace(accident.getId(), accident);
+    }
+
+    @Override
+    public Accident get(int id) {
+        return accidents.get(id);
+    }
 }

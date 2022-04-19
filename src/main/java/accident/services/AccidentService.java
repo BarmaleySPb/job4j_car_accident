@@ -17,4 +17,16 @@ public class AccidentService {
     public Collection<Accident> findAll() {
         return store.findAll();
     }
+
+    public void create(Accident accident) {
+        store.create(accident);
+    }
+
+    public void update(Accident accident) {
+        store.update(accident);
+    }
+
+    public Accident get(int id) {
+        return store.get(id);
+    }
 }

@@ -30,7 +30,7 @@ Hello : ${user}
     <c:forEach items="${accidents}" var="accident">
         <tr>
             <td>
-                ${accident.id}
+                <a href="<c:url value='/edit?id=${accident.id}'/>">${accident.id}</a>
             </td>
             <td>
                 ${accident.name}
@@ -46,6 +46,8 @@ Hello : ${user}
     </tbody>
 
 </table>
+
+<a href="<c:url value='/create'/>">Добавить инцидент</a>
 
 </body>
 </html>

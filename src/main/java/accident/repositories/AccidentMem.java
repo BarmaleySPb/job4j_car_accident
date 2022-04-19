@@ -32,7 +32,6 @@ public class AccidentMem implements Store {
 
     @Override
     public void update(Accident accident) {
-        System.out.println(accident.getId());
         accidents.replace(accident.getId(), accident);
     }
 

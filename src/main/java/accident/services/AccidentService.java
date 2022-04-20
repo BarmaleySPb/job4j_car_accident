@@ -1,6 +1,7 @@
 package accident.services;
 
 import accident.models.Accident;
+import accident.models.AccidentType;
 import accident.repositories.Store;
 import org.springframework.stereotype.Service;
 
@@ -16,6 +17,10 @@ public class AccidentService {
 
     public Collection<Accident> findAll() {
         return store.findAll();
+    }
+
+    public Collection<AccidentType> getAllAccidentType() {
+        return store.getAllAccidentType();
     }
 
     public void create(Accident accident) {

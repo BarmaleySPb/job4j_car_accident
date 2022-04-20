@@ -7,15 +7,15 @@
 
         <tr>
             <td>Name:</td>
-            <td><input type='text' name='name'></td>
+            <td><input type='text' name='name' value="${accident.name}"></td>
         </tr>
         <tr>
             <td>Text:</td>
-            <td><input type='text' name='text'></td>
+            <td><input type='text' name='text' value="${accident.text}"></td>
         </tr>
         <tr>
             <td>Address:</td>
-            <td><input type='text' name='address'></td>
+            <td><input type='text' name='address' value="${accident.address}"></td>
         </tr>
         <tr>
             <td colspan='2'><input name="submit" type="submit" value="Save" /></td>

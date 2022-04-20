@@ -23,6 +23,7 @@ Hello : ${user}
         <th scope="col">Name</th>
         <th scope="col">Text</th>
         <th scope="col">Address</th>
+        <th scope="col">Type</th>
     </tr>
     </thead>
 
@@ -40,6 +41,9 @@ Hello : ${user}
             </td>
             <td>
                 ${accident.address}
+            </td>
+            <td>
+                ${accident.type.name}
             </td>
         </tr>
     </c:forEach>

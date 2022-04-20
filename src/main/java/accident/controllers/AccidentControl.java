@@ -46,19 +46,14 @@ public class AccidentControl {
     }
 
     @PostMapping("/edit")
-    public String update(@RequestParam("id") int id, @RequestParam("name") String name,
-                         @RequestParam("text") String text, @RequestParam("address") String address) {
-        Accident accident = service.get(id);
-        accident.setName(name);
-        accident.setText(text);
-        accident.setAddress(address);
+    public String update(@ModelAttribute Accident accident) {
         service.update(accident);
         return "redirect:/";
     }
 
     @GetMapping("/edit")
-    public String update(@ModelAttribute Accident accident) {
-        service.update(accident);
+    public String update(@RequestParam("id") int id, Model model) {
+        model.addAttribute("accident", service.get(id));
         return "accident/edit";
     }
 }

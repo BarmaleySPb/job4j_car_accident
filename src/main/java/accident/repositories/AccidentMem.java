@@ -11,7 +11,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Repository
 public class AccidentMem implements Store {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
-    private final AtomicInteger ID = new AtomicInteger(4);
+    private final AtomicInteger id = new AtomicInteger(4);
 
     private AccidentMem() {
         accidents.put(1, Accident.of("first", "first text", "first address"));
@@ -27,7 +27,7 @@ public class AccidentMem implements Store {
 
     @Override
     public void create(Accident accident) {
-        accident.setId(ID.incrementAndGet());
+        accident.setId(id.incrementAndGet());
         accidents.put(accident.getId(), accident);
     }
 

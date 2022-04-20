@@ -41,6 +41,7 @@ public class AccidentControl {
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
+        service.create(accident);
         return "redirect:/";
     }
 
@@ -56,9 +57,8 @@ public class AccidentControl {
     }
 
     @GetMapping("/edit")
-    public String update(@RequestParam("id") int id, Model model) {
-        Accident accident = service.get(id);
-        model.addAttribute("accident", accident);
+    public String update(@ModelAttribute Accident accident) {
+        service.update(accident);
         return "accident/edit";
     }
 }

@@ -2,6 +2,7 @@ package accident.services;
 
 import accident.models.Accident;
 import accident.models.AccidentType;
+import accident.models.Rule;
 import accident.repositories.Store;
 import org.springframework.stereotype.Service;
 
@@ -23,8 +24,12 @@ public class AccidentService {
         return store.getAllAccidentType();
     }
 
-    public void create(Accident accident) {
-        store.create(accident);
+    public Collection<Rule> getAllRules() {
+        return store.getAllRules();
+    }
+
+    public void create(Accident accident, String[] ids) {
+        store.create(accident, ids);
     }
 
     public void update(Accident accident) {

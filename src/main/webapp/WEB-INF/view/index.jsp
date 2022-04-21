@@ -24,6 +24,7 @@ Hello : ${user}
         <th scope="col">Text</th>
         <th scope="col">Address</th>
         <th scope="col">Type</th>
+        <th scope="col">Rules</th>
     </tr>
     </thead>
 
@@ -44,6 +45,11 @@ Hello : ${user}
             </td>
             <td>
                 ${accident.type.name}
+            </td>
+            <td>
+                <c:forEach items="${accident.rules}" var="rule">
+                    ${rule.name}
+                </c:forEach>
             </td>
         </tr>
     </c:forEach>

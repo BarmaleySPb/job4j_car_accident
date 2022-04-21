@@ -1,7 +1,5 @@
 package accident.controllers;
 
-import accident.models.AccidentType;
-import accident.models.Rule;
 import accident.services.AccidentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,8 +10,6 @@ import accident.models.Accident;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
-import java.util.List;
 
 @Controller
 public class AccidentControl {
@@ -26,19 +22,21 @@ public class AccidentControl {
     @GetMapping("/create")
     public String create(Model model) {
         model.addAttribute("types", service.getAllAccidentType());
+        model.addAttribute("rules", service.getAllRules());
         return "accident/create";
     }
 
     @PostMapping("/save")
     public String save(@ModelAttribute Accident accident, HttpServletRequest req) {
         String[] ids = req.getParameterValues("rIds");
-        service.create(accident);
+        service.create(accident, ids);
         return "redirect:/";
     }
 
     @PostMapping("/edit")
     public String update(@ModelAttribute Accident accident) {
         accident.setType(service.get(accident.getId()).getType());
+        accident.setRules(service.get(accident.getId()).getRules());
         service.update(accident);
         return "redirect:/";
     }

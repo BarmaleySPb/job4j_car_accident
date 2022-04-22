@@ -16,8 +16,8 @@ public class AccidentService {
         this.store = store;
     }
 
-    public Collection<Accident> findAll() {
-        return store.findAll();
+    public Collection<Accident> getAll() {
+        return store.getAll();
     }
 
     public Collection<AccidentType> getAllAccidentType() {

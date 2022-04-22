@@ -1,21 +1,21 @@
 package accident.controllers;
 
-import accident.services.AccidentService;
+import accident.repositories.AccidentJdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class IndexControl {
-    private final AccidentService service;
+    private final AccidentJdbcTemplate accidents;
 
-    public IndexControl(AccidentService service) {
-        this.service = service;
+    public IndexControl(AccidentJdbcTemplate accidents) {
+        this.accidents = accidents;
     }
 
     @GetMapping("/")
     public String index(Model model) {
-        model.addAttribute("accidents", service.findAll());
+        model.addAttribute("accidents", accidents.getAll());
         return "index";
     }
 }

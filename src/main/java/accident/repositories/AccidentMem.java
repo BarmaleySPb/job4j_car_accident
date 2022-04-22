@@ -9,7 +9,9 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-@Repository
+/**
+ * @Repository
+ */
 public class AccidentMem implements Store {
     private final Map<Integer, Accident> accidents = new ConcurrentHashMap<>();
     private final Map<Integer, AccidentType> types = new HashMap<>();
@@ -32,7 +34,7 @@ public class AccidentMem implements Store {
     }
 
     @Override
-    public Collection<Accident> findAll() {
+    public Collection<Accident> getAll() {
         return accidents.values();
     }
 
@@ -47,7 +49,7 @@ public class AccidentMem implements Store {
     }
 
     @Override
-    public void create(Accident accident, String[] ids) {
+    public Accident create(Accident accident, String[] ids) {
         Set<Rule> rulesToAdd = new HashSet<>();
         for (String idd : ids) {
             rulesToAdd.add(rules.get(Integer.parseInt(idd)));
@@ -56,6 +58,7 @@ public class AccidentMem implements Store {
         accident.setId(id.incrementAndGet());
         accident.setType(types.get(accident.getType().getId()));
         accidents.put(accident.getId(), accident);
+        return accident;
     }
 
     @Override

@@ -1,19 +1,32 @@
 package accident.models;
 
+import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+@Entity
+@Table(name = "accident")
 public class Accident {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "name")
     private String name;
+    @Column(name = "text")
     private String text;
+    @Column(name = "address")
     private String address;
+    @ManyToOne(fetch = FetchType.LAZY, cascade = {
+            CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.DETACH})
+    @JoinColumn(name = "type_id")
     private AccidentType type;
-    private Set<Rule> rules;
-
-    public Accident() {
-
-    }
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "accidents_rules",
+            joinColumns = {@JoinColumn(name = "accident_id")},
+            inverseJoinColumns = {@JoinColumn(name = "rule_id")})
+    private Set<Rule> rules = new HashSet<>();
 
     public static Accident of(String name, String text, String address) {
         Accident accident = new Accident();

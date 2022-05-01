@@ -11,7 +11,10 @@ import org.springframework.stereotype.Repository;
 import java.sql.PreparedStatement;
 import java.util.*;
 
-@Repository
+/**
+ *@Repository
+ */
+
 public class AccidentJdbcTemplate implements Store {
     private final JdbcTemplate jdbc;
 

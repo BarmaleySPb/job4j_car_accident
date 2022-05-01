@@ -1,11 +1,16 @@
 package accident.models;
 
+import javax.persistence.*;
 import java.util.Objects;
 
-
+@Entity
+@Table(name = "accident_rule")
 public class Rule {
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private int id;
+    @Column(name = "name")
     private String name;
 
     public static Rule of(int id, String name) {

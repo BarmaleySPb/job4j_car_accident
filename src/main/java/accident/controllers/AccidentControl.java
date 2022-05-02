@@ -1,6 +1,7 @@
 package accident.controllers;
 
-import accident.services.AccidentService;
+import accident.services.AccidentDataService;
+import javassist.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,9 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class AccidentControl {
-    private final AccidentService service;
+    private final AccidentDataService service;
 
-    public AccidentControl(AccidentService service) {
+    public AccidentControl(AccidentDataService service) {
         this.service = service;
     }
 
@@ -34,7 +35,7 @@ public class AccidentControl {
     }
 
     @PostMapping("/edit")
-    public String update(@ModelAttribute Accident accident) {
+    public String update(@ModelAttribute Accident accident) throws NotFoundException {
         accident.setType(service.get(accident.getId()).getType());
         accident.setRules(service.get(accident.getId()).getRules());
         service.update(accident);
@@ -42,7 +43,7 @@ public class AccidentControl {
     }
 
     @GetMapping("/edit")
-    public String update(@RequestParam("id") int id, Model model) {
+    public String update(@RequestParam("id") int id, Model model) throws NotFoundException {
         model.addAttribute("accident", service.get(id));
         return "accident/edit";
     }

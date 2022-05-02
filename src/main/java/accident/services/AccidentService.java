@@ -8,7 +8,10 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collection;
 
-@Service
+/**
+ *@Service
+ */
+
 public class AccidentService {
     private final Store store;
 

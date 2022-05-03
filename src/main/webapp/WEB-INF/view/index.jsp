@@ -14,7 +14,10 @@
   <meta content="text/html; charset=utf-8"/>
 </head>
 <body>
-Hello : ${user}
+
+<div>
+  Login as : ${user.username}
+</div>
 
 <table class="table">
   <thead>

@@ -1,5 +1,6 @@
 package accident.controllers;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,10 @@ public class IndexControl {
         accidents.findAll().forEach(res::add);
         res.sort(Comparator.comparing(Accident::getId));
         model.addAttribute("accidents", res);
+        model.addAttribute("user", SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal());
         return "index";
     }
 }

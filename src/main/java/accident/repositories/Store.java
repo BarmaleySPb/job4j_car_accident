@@ -7,7 +7,6 @@ import accident.models.Rule;
 import java.util.Collection;
 
 public interface Store {
-
     Collection<Accident> getAll();
     Collection<AccidentType> getAllAccidentType();
     Collection<Rule> getAllRules();

@@ -9,6 +9,7 @@ import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.*;
 
 /**
@@ -58,31 +59,13 @@ public class AccidentJdbcTemplate implements Store {
     @Override
     public Accident get(int id) {
         return jdbc.queryForObject("select * from accident where id = ?",
-                (rs, row) -> {
-                    Accident accident = new Accident();
-                    accident.setId(rs.getInt("id"));
-                    accident.setName(rs.getString("name"));
-                    accident.setText(rs.getString("text"));
-                    accident.setAddress(rs.getString("address"));
-                    accident.setType(getAccidentType(rs.getInt("type_id")));
-                    accident.setRules(new HashSet<>(setRulesForAccident(accident)));
-                    return accident;
-                }, id);
+                this::getAccident, id);
     }
 
     @Override
     public List<Accident> getAll() {
         return jdbc.query("select * from accident order by id",
-                (rs, row) -> {
-                    Accident accident = new Accident();
-                    accident.setId(rs.getInt("id"));
-                    accident.setName(rs.getString("name"));
-                    accident.setText(rs.getString("text"));
-                    accident.setAddress(rs.getString("address"));
-                    accident.setType(getAccidentType(rs.getInt("type_id")));
-                    accident.setRules(new HashSet<>(setRulesForAccident(accident)));
-                    return accident;
-                });
+                this::getAccident);
     }
 
     @Override
@@ -129,5 +112,16 @@ public class AccidentJdbcTemplate implements Store {
                     rule.setName(rs.getString("name"));
                     return rule;
                 }, accident.getId());
+    }
+
+    private Accident getAccident(java.sql.ResultSet rs, int row) throws SQLException {
+        Accident accident = new Accident();
+        accident.setId(rs.getInt("id"));
+        accident.setName(rs.getString("name"));
+        accident.setText(rs.getString("text"));
+        accident.setAddress(rs.getString("address"));
+        accident.setType(getAccidentType(rs.getInt("type_id")));
+        accident.setRules(new HashSet<>(setRulesForAccident(accident)));
+        return accident;
     }
 }
